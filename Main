@@ -1,0 +1,90 @@
+import os
+import fnmatch
+import threading
+import moviepy.editor as mp
+from pytube import YouTube
+from tkinter import *
+
+
+def clean_title(title):
+    check = ["~", "*", "<", ">", "?", ":", "|", "/", "\\", ".", ",", "\"", "\'"]
+
+    for _ in check:
+        if _ in title:
+            title = title.replace(_, "")
+
+    return title
+
+
+def download_audio():
+    def inner_download_audio():
+        url = url_entry.get()
+        url_entry.delete(0, END)
+        yt = YouTube(url)
+
+        c_title = clean_title(yt.title)
+
+        yt.streams.first().download(".\\temp")
+
+        if os.path.exists(".\\temp\\" + c_title + ".mp4"):
+            with mp.VideoFileClip(".\\temp\\" + c_title + ".mp4") as clip:
+                clip.audio.write_audiofile(c_title + ".mp3")
+        else:
+            yt.streams.filter(only_audio=True).first().download()
+
+        for file in os.listdir(".\\temp\\"):
+            if os.path.splitext(file)[0] == c_title:
+                os.remove(".\\temp\\" + file)
+
+        print("Done")
+
+    ta = threading.Thread(target=inner_download_audio)
+    ta.start()
+
+    return 0
+
+
+def download_video():
+    def inner_download_video():
+        url = url_entry.get()
+        url_entry.delete(0, END)
+        yt = YouTube(url)
+
+        yt.streams.first().download("")
+        print("Done")
+
+    tv = threading.Thread(target=inner_download_video)
+    tv.start()
+
+    return 0
+
+def show_widget(w):
+    w.widget.grid()
+
+def hide_widget(w):
+    w.widget.grid_remove()
+
+# tkinter
+root = Tk()
+root.title("YDownloader")
+root.geometry("250x105+650+300")
+
+url_entry = Entry(root, width=50)
+
+url_checkbox = Checkbutton(root, text="Audio only")
+
+audio_btn = Button(root, bg="green", text="Audio", command=download_audio)
+video_btn = Button(root, bg="green", text="Video", command=download_video)
+
+url_entry.pack()
+url_checkbox.pack()
+audio_btn.pack()
+video_btn.pack()
+
+root.mainloop()
+
+# TODO 1: Make project a Github repo
+# TODO 2: Consider making a unified download function
+# TODO 3: Add playlist download functionality
+# TODO 4: Add progress bar
+# TODO 5: Create file download location dropdown menu (possible config file)
