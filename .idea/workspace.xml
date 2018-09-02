@@ -9,19 +9,20 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/YDownloader$Main.coverage" NAME="Main Coverage Results" MODIFIED="1535870847367" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/YDownloader$Main.coverage" NAME="Main Coverage Results" MODIFIED="1535875773275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="672547914">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="2" />
+          <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -37,14 +38,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Main" value="3677" />
+          <entry key="Main" value="4101" />
           <entry key="py" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="31" />
-          <entry key="Python" value="3677" />
+          <entry key="Python" value="4101" />
         </counts>
       </usages-collector>
     </session>
@@ -54,12 +55,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Main">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="613">
-              <caret line="90" selection-start-line="90" selection-end-line="90" />
+            <state relative-caret-position="1683">
+              <caret line="99" column="8" selection-start-line="99" selection-start-column="8" selection-end-line="99" selection-end-column="8" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1535870826232" expanded="true" signature="144:331" ph="..." />
-                <marker date="1535870826232" expanded="true" signature="447:983" ph="..." />
+                <marker date="1535875988145" expanded="true" signature="154:341" ph="..." />
+                <marker date="1535875988145" expanded="true" signature="451:1059" ph="..." />
               </folding>
             </state>
           </provider>
@@ -101,7 +102,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -113,6 +113,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -189,7 +190,7 @@
     <frame x="-7" y="-7" width="1653" height="896" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25674826" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.259887" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -223,12 +224,12 @@
     <entry file="file://$PROJECT_DIR$/maine.py" />
     <entry file="file://$PROJECT_DIR$/Main">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="613">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="1683">
+          <caret line="99" column="8" selection-start-line="99" selection-start-column="8" selection-end-line="99" selection-end-column="8" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1535870826232" expanded="true" signature="144:331" ph="..." />
-            <marker date="1535870826232" expanded="true" signature="447:983" ph="..." />
+            <marker date="1535875988145" expanded="true" signature="154:341" ph="..." />
+            <marker date="1535875988145" expanded="true" signature="451:1059" ph="..." />
           </folding>
         </state>
       </provider>

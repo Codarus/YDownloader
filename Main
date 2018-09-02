@@ -2,7 +2,7 @@ import os
 import fnmatch
 import threading
 import moviepy.editor as mp
-from pytube import YouTube
+from pytube import YouTube, Playlist
 from tkinter import *
 
 
@@ -16,75 +16,85 @@ def clean_title(title):
     return title
 
 
-def download_audio():
+def download():
     def inner_download_audio():
         url = url_entry.get()
         url_entry.delete(0, END)
         yt = YouTube(url)
 
-        c_title = clean_title(yt.title)
+        if "&list=" not in url:
+            c_title = clean_title(yt.title)
 
-        yt.streams.first().download(".\\temp")
+            yt.streams.first().download(".\\temp")
 
-        if os.path.exists(".\\temp\\" + c_title + ".mp4"):
-            with mp.VideoFileClip(".\\temp\\" + c_title + ".mp4") as clip:
-                clip.audio.write_audiofile(c_title + ".mp3")
+            if os.path.exists(".\\temp\\" + c_title + ".mp4"):
+                with mp.VideoFileClip(".\\temp\\" + c_title + ".mp4") as clip:
+                    clip.audio.write_audiofile(c_title + ".mp3")
+            else:
+                yt.streams.filter(only_audio=True).first().download()
+
+            for file in os.listdir(".\\temp\\"):
+                if os.path.splitext(file)[0] == c_title:
+                    os.remove(".\\temp\\" + file)
         else:
-            yt.streams.filter(only_audio=True).first().download()
+            pl = Playlist(url)
+            pl.download_all(".\\temp\\")
 
-        for file in os.listdir(".\\temp\\"):
-            if os.path.splitext(file)[0] == c_title:
-                os.remove(".\\temp\\" + file)
+            for file in os.listdir(".\\temp\\"):
+                c_title = clean_title(os.path.splitext(file)[0])
+
+                if os.path.exists(".\\temp\\" + c_title + ".mp4"):
+                    with mp.VideoFileClip(".\\temp\\" + c_title + ".mp4") as clip:
+                        clip.audio.write_audiofile(c_title + ".mp3")
+                    os.remove(".\\temp\\" + file)
+                else:
+                    print("File not found: " + file)
 
         print("Done")
 
-    ta = threading.Thread(target=inner_download_audio)
-    ta.start()
-
-    return 0
-
-
-def download_video():
     def inner_download_video():
         url = url_entry.get()
         url_entry.delete(0, END)
         yt = YouTube(url)
 
-        yt.streams.first().download("")
+        if "&list=" not in url:
+            yt.streams.first().download()
+        else:
+            pl = Playlist(url)
+            pl.download_all()
+
         print("Done")
 
-    tv = threading.Thread(target=inner_download_video)
-    tv.start()
+    state = url_checkbox_state.get()
+
+    if state == 0:
+        tv = threading.Thread(target=inner_download_video)
+        tv.start()
+    else:
+        ta = threading.Thread(target=inner_download_audio)
+        ta.start()
 
     return 0
 
-def show_widget(w):
-    w.widget.grid()
-
-def hide_widget(w):
-    w.widget.grid_remove()
 
 # tkinter
 root = Tk()
 root.title("YDownloader")
-root.geometry("250x105+650+300")
+root.geometry("250x100+650+300")
 
 url_entry = Entry(root, width=50)
 
-url_checkbox = Checkbutton(root, text="Audio only")
+url_checkbox_state = IntVar()
+url_checkbox = Checkbutton(root, text="Audio only", variable=url_checkbox_state)
+# 0 = not checked
 
-audio_btn = Button(root, bg="green", text="Audio", command=download_audio)
-video_btn = Button(root, bg="green", text="Video", command=download_video)
+download_btn = Button(root, bg="green", text="Download", command=download)
 
 url_entry.pack()
 url_checkbox.pack()
-audio_btn.pack()
-video_btn.pack()
+download_btn.pack()
 
 root.mainloop()
 
-# TODO 1: Make project a Github repo
-# TODO 2: Consider making a unified download function
-# TODO 3: Add playlist download functionality
-# TODO 4: Add progress bar
-# TODO 5: Create file download location dropdown menu (possible config file)
+# TODO 1: Add progress bar
+# TODO 2: Create file download location dropdown menu (possible config file)
