@@ -86,7 +86,6 @@ url_entry = Entry(root, width=50)
 
 url_checkbox_state = IntVar()
 url_checkbox = Checkbutton(root, text="Audio only", variable=url_checkbox_state)
-# 0 = not checked
 
 download_btn = Button(root, bg="green", text="Download", command=download)
 
@@ -94,7 +93,10 @@ url_entry.pack()
 url_checkbox.pack()
 download_btn.pack()
 
-root.mainloop()
+
+if __name__ == '__main__':
+
+    root.mainloop()
 
 # TODO 1: Add progress bar
 # TODO 2: Create file download location dropdown menu (possible config file)
